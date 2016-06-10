@@ -1,0 +1,22 @@
+{
+  "name": "hmgf",
+  "version": "1.0.0",
+  "description": "hmgf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgk/hmgf.git"
+  },
+  "author": "Panos Kountanis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pgk/hmgf/issues"
+  },
+  "homepage": "https://github.com/pgk/hmgf#readme",
+  "devDependencies": {
+    "bower": "^1.7.9"
+  }
+}
