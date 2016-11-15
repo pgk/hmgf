@@ -26,3 +26,25 @@ export const getById = (store, ingredientID) => {
   }
   return null
 }
+
+export const nutrientReducer = (totals, food) => {
+  totals.calories += food.calories
+  totals.protein += food.protein
+  totals.carbs += food.carbs
+  totals.fats += food.fats
+  return totals
+}
+
+export const getEmptyFood = () => {
+  return {
+    id: null,
+    name: '',
+    parentId: null,
+    parentQuantity: null,
+    quantity: 0,
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0
+  }
+}

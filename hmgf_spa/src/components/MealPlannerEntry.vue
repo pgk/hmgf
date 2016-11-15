@@ -33,12 +33,7 @@
 <script>
 import EntryTotals from './EntryTotals'
 import IngredientTableRow from './IngredientTableRow'
-import Utils from './../Utils'
 import * as Foods from './../Foods'
-
-let getEmptyFood = Utils.getEmptyFood
-
-let nutrientReducer = Utils.nutrientReducer
 
 export default {
   props: ['entry', 'index'],
@@ -49,10 +44,10 @@ export default {
       return meals.reduce((total, meal) => {
         let mealTotals = meal.ingredients.reduce((total, ingr) => {
           let ingred = Foods.getById(this.$store, ingr.ingredientID)
-          return nutrientReducer(total, Foods.multiply(ingred, ingr.quantity))
-        }, getEmptyFood())
-        return nutrientReducer(total, mealTotals)
-      }, getEmptyFood())
+          return Foods.nutrientReducer(total, Foods.multiply(ingred, ingr.quantity))
+        }, Foods.getEmptyFood())
+        return Foods.nutrientReducer(total, mealTotals)
+      }, Foods.getEmptyFood())
     }
   }
 }
