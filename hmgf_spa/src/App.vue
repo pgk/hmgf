@@ -1,21 +1,26 @@
 <template>
-  <div id="app">
-    <meal-planner-view></meal-planner-view>
+  <div id="app" class="container">
+    <div >
+      <menu-view></menu-view>
+      <meal-planner-view></meal-planner-view>
+    </div>
   </div>
 </template>
 
 <script>
 import MealPlannerView from './components/MealPlannerView'
+import MenuView from './components/MenuView'
 import AppStyles from './AppStyles' // eslint-disable-line no-unused-vars
 
 export default {
-  components: {MealPlannerView}
+  components: {MealPlannerView, MenuView}
 }
 </script>
 
 <style>
 html {
-  /*height: 100%;*/
+  height: 100%;
+  /*background-color: #1f1f1f;*/
 }
 
 body {

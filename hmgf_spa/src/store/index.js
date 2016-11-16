@@ -10,6 +10,8 @@ Vue.use(Vuex)
 const state = {
   mealPlanner: {
     title: 'Meal Planner',
+    showEntries: true,
+    showIngredients: false,
     entries: [
       {
         weekName: 'Week 1',

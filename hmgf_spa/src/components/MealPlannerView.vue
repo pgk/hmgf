@@ -1,12 +1,14 @@
 <template>
-  <div class="meal-planner-view container">
-    <h1>{{ mealPlannerTitle }}</h1>
-    <meal-planner-entry
-      v-for="(entry, index) in entries"
-      v-bind:entry="entry"
-      v-bind:index="index">
-    </meal-planner-entry>
-    <button v-on:click="addEmptyEntry">Add Entry</button>
+  <div class="nine columns" v-show="showEntries">
+    <div class="meal-planner-view">
+      <h1>{{ mealPlannerTitle }}</h1>
+      <meal-planner-entry
+        v-for="(entry, index) in entries"
+        v-bind:entry="entry"
+        v-bind:index="index">
+      </meal-planner-entry>
+      <button v-on:click="addEmptyEntry">Add Entry</button>
+    </div>
   </div>
 </template>
 
@@ -25,6 +27,9 @@ export default {
     mealPlannerTitle () {
       return this.$store.state.mealPlanner.title
     },
+    showEntries () {
+      return this.$store.state.mealPlanner.showEntries
+    },
     entries () {
       return this.$store.state.mealPlanner.entries
     }
@@ -38,7 +43,7 @@ h1 {
   color: #42b983;
 }
 .meal-planner-view {
-
+  background-color: #FFFFFF;
 }
 .nice-input {
   font-size: 0.9em;
