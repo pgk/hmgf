@@ -1,19 +1,56 @@
 <template>
   <div class="form-field">
-    <label>{{ field.name }}</label>
-    <input v-bind:name="field.name" v-bind:value="field.value" />
+    <label>{{ labelText }}</label>
+    <div class="alert-box error" v-show="validationError">Error: {{ validationError }}</div>
+    <input
+      v-bind:type="type || 'text'"
+      v-bind:name="attribute" v-model="model[attribute]" />
   </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      field: {
-        name: '',
-        value: 0
-      }
+  props: ['label', 'name', 'type', 'model', 'attribute', 'errorsFrom'],
+  computed: {
+    labelText () {
+      return this.label || this.attribute
+    },
+    validationError () {
+      return this.errorsFrom[this.attribute] ? this.errorsFrom[this.attribute] : false
     }
   }
 }
 </script>
+
+<style scoped>
+.alert-box {
+    color:#555;
+    border-radius:10px;
+    /*font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;*/
+    padding:10px 10px 10px 36px;
+    margin:10px;
+}
+
+.alert-box span {
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.error {
+    background:#ffecec;
+    border:1px solid #f5aca6;
+}
+.success {
+    background:#e9ffd9;
+    border:1px solid #a6ca8a;
+}
+.warning {
+    background:#fff8c4;
+    border:1px solid #f2c779;
+}
+.notice {
+    background:#e3f7fc;
+    border:1px solid #8ed9f6;
+}
+
+</style>

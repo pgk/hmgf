@@ -7,35 +7,8 @@
         <button v-on:click="creatingIngredient = true">+New Ingredient</button>
         <transition name="fade">
         <div v-show="creatingIngredient == true">
-          <div>
-            <label>Name</label>
-            <input type="text" name="name" v-model="ingredient.name">
-          </div>
-          <div>
-            <label>Quantity</label>
-            <input type="number" name="quantity" v-model="ingredient.quantity">
-          </div>
-          <div>
-            <label>Unit</label>
-            <input type="text" name="unit" v-model="ingredient.unit">
-          </div>
-          <div>
-            <label>Calories</label>
-            <input type="number" name="calories" v-model="ingredient.calories">
-          </div>
-          <div>
-            <label>Protein</label>
-            <input type="number" name="protein" v-model="ingredient.protein">
-          </div>
-          <div>
-            <label>Carbs</label>
-            <input type="number" name="carbs" v-model="ingredient.carbs">
-          </div>
-          <div>
-            <label>Fats</label>
-            <input type="number" name="fats" v-model="ingredient.fats">
-          </div>
-          <button v-on:click="validateAndAddIngredient">Add Ingredient</button>
+          <ingredient-create-form v-bind:ingredient="ingredient">
+          </ingredient-create-form>
         </div>
         </transition>
         <transition name="fade">
@@ -59,12 +32,16 @@
 import MainLayout from '../layouts/MainLayout.vue'
 import TableHead from '../components/TableHead'
 import IngredientDetailTableRow from '../components/IngredientDetailTableRow'
+import IngredientCreateForm from '../components/IngredientCreateForm'
 import * as Foods from './../Foods'
-import { mapMutations } from 'vuex'
-// import store from './../store'
 
 export default {
-  components: {MainLayout, TableHead, IngredientDetailTableRow},
+  components: {
+    MainLayout,
+    TableHead,
+    IngredientDetailTableRow,
+    IngredientCreateForm
+  },
   data () {
     return {
       creatingIngredient: false,
@@ -73,22 +50,8 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
-      'addIngredient'
-    ]),
     toggleCreatingIngredient () {
       this.creatingIngredient = !this.creatingIngredient
-    },
-    validateAndAddIngredient () {
-      let ingredient = this.ingredient
-      // console.log(ingredient)
-      if (!ingredient.name || !ingredient.name.trim()) {
-      }
-
-      if (!ingredient.id) {
-        // we are adding a new ingredient
-        this.$store.dispatch({type: 'addIngredient', ingredient})
-      }
     }
   },
   computed: {
