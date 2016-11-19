@@ -11,7 +11,7 @@ let migrations = (db) => {
   db.version(2).stores({
     users: '++id, nickname, password, email, dateActivated, dateRegistered',
     ingredients: '++id, name, parentID, parentQuantity, quantity, unit, calories, protein, carbs, fats, *childrenIngredients',
-    entries: '++id, weekName, dayName, userID, *meals',
+    entries: '++id, weekName, dayName, userID, *meals'
   })
 }
 
@@ -22,11 +22,11 @@ export const createDatabasePersistence = (databaseName) => {
   let getDb = (() => {
     let db = null
     let initializeDatabase = () => {
+      migrations(db)
+
       if (connected) {
         return Dexie.Promise.resolve(db)
       }
-
-      migrations(db)
 
       return db.open().then(() => {
         connected = true

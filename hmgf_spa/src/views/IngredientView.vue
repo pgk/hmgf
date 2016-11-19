@@ -33,7 +33,7 @@ import MainLayout from '../layouts/MainLayout.vue'
 import TableHead from '../components/TableHead'
 import IngredientDetailTableRow from '../components/IngredientDetailTableRow'
 import IngredientCreateForm from '../components/IngredientCreateForm'
-import * as Foods from './../Foods'
+import * as Foods from './../models/Foods'
 
 export default {
   components: {

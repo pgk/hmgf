@@ -16,7 +16,7 @@
 <script>
 import store from './../store'
 import * as types from './../store/mutation-types'
-import * as Foods from './../Foods'
+import * as Foods from './../models/Foods'
 
 export default {
   props: ['ingredientEntry', 'index', 'mealIndex', 'entryIndex'],

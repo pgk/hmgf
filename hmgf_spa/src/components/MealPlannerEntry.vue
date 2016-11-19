@@ -27,7 +27,7 @@
 import EntryTotals from './EntryTotals'
 import TableHead from './TableHead'
 import IngredientTableRow from './IngredientTableRow'
-import * as Foods from './../Foods'
+import * as Foods from './../models/Foods'
 
 export default {
   props: ['entry', 'index'],
