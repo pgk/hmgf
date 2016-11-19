@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {ingredients, dbPersistence} from './modules/ingredients'
+import {createIngredientsModule} from './modules/ingredients'
+import entries from './modules/entries'
 import * as types from './mutation-types'
+import {createDatabasePersistence} from './../persistence'
 
 Vue.use(Vuex)
 
@@ -11,37 +13,7 @@ const state = {
   mealPlanner: {
     title: 'Meal Planner',
     entryTableHeadings: ['Quantity', 'Name', 'Unit', 'Calories', 'Protein', 'Carbs', 'Fats'],
-    ingredientTableHeadings: ['Quantity', 'Name', 'Unit', 'Calories', 'Protein', 'Carbs', 'Fats'],
-    entries: [
-      {
-        weekName: 'Week 1',
-        dayName: 'Day 1',
-        meals: [
-          {
-            title: 'Main meal',
-            ingredients: [
-              {
-                ingredientID: 1,
-                quantity: 650
-              },
-              {
-                ingredientID: 2,
-                quantity: 482
-              }
-            ]
-          },
-          {
-            title: 'Snack',
-            ingredients: [
-              {
-                ingredientID: 3,
-                quantity: 225
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    ingredientTableHeadings: ['Quantity', 'Name', 'Unit', 'Calories', 'Protein', 'Carbs', 'Fats']
   },
   changelog: []
 }
@@ -80,43 +52,16 @@ const mutations = {
 
 }
 
-const actions = {
-  [types.UPDATE_INGREDIENT_FOR_MEAL_FOR_ENTRY] ({commit}, payload) {
-    commit(types.UPDATE_INGREDIENT_FOR_MEAL_FOR_ENTRY, payload)
-  },
-  [types.ADD_EMPTY_ENTRY] ({commit}) {
-    commit(types.ADD_EMPTY_ENTRY)
-  },
-  increment: ({ commit }) => commit('increment'),
-  decrement: ({ commit }) => commit('decrement'),
-  incrementIfOdd ({ commit, state }) {
-    if ((state.count + 1) % 2 === 0) {
-      commit('increment')
-    }
-  },
-  incrementAsync ({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('increment')
-        resolve()
-      }, 1000)
-    })
-  }
-}
-
-const getters = {
-  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
-}
+const dbPersistence = createDatabasePersistence('HmgfDb2')
 
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
 export default new Vuex.Store({
   state,
-  getters,
-  actions,
   mutations,
   modules: {
-    ingredients
+    ingredients: createIngredientsModule(dbPersistence),
+    entries
   },
   plugins: [dbPersistence.plugin]
 })
