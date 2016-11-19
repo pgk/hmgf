@@ -4,15 +4,8 @@
     <div class="meal-planner-meal-entry" v-for="(meal, mealIndex) in entry.meals">
       <h3>{{ meal.title }}</h3>
       <table>
-        <tr>
-          <th>Quantity</th>
-          <th>Name</th>
-          <th>Unit</th>
-          <th>Calories</th>
-          <th>Protein</th>
-          <th>Carbs</th>
-          <th>Fats</th>
-        </tr>
+        <table-head v-bind:headings="headings">
+        </table-head>
         <ingredient-table-row
           v-for="(ingredientEntry, ingredientIndex) in meal.ingredients"
           v-bind:ingredientEntry="ingredientEntry"
@@ -32,13 +25,17 @@
 
 <script>
 import EntryTotals from './EntryTotals'
+import TableHead from './TableHead'
 import IngredientTableRow from './IngredientTableRow'
 import * as Foods from './../Foods'
 
 export default {
   props: ['entry', 'index'],
-  components: {EntryTotals, IngredientTableRow},
+  components: {EntryTotals, IngredientTableRow, TableHead},
   computed: {
+    headings () {
+      return this.$store.state.mealPlanner.entryTableHeadings
+    },
     totals () {
       let meals = this.entry.meals
       return meals.reduce((total, meal) => {

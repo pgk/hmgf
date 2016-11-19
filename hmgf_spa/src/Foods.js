@@ -39,6 +39,7 @@ export const getEmptyFood = () => {
   return {
     id: null,
     name: '',
+    unit: 'g',
     parentId: null,
     parentQuantity: null,
     quantity: 0,

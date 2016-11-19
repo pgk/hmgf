@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {ingredients, dbPersistence} from './modules/ingredients'
 import * as types from './mutation-types'
-import ingredients from './modules/ingredients'
 
 Vue.use(Vuex)
 
@@ -10,8 +10,8 @@ Vue.use(Vuex)
 const state = {
   mealPlanner: {
     title: 'Meal Planner',
-    showEntries: true,
-    showIngredients: false,
+    entryTableHeadings: ['Quantity', 'Name', 'Unit', 'Calories', 'Protein', 'Carbs', 'Fats'],
+    ingredientTableHeadings: ['Quantity', 'Name', 'Unit', 'Calories', 'Protein', 'Carbs', 'Fats'],
     entries: [
       {
         weekName: 'Week 1',
@@ -117,5 +117,6 @@ export default new Vuex.Store({
   mutations,
   modules: {
     ingredients
-  }
+  },
+  plugins: [dbPersistence.plugin]
 })

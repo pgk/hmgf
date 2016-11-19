@@ -1,16 +1,17 @@
 <template>
-  <div class="three columns">
-    <div class="menu-view">
-      <ul>
-        <li><a href="#entries" v-on:click="showEntries">Entries</a></li>
-        <li><a href="#ingredients" v-on:click="showIngredients">Ingredients</a></li>
-      </ul>
-    </div>
+  <div class="menu-view">
+    <ul>
+      <li><v-link href="/">Entries</v-link></li>
+      <li><v-link href="/ingredients">Ingredients</v-link></li>
+    </ul>
   </div>
 </template>
 
 <script>
+import VLink from './VLink'
+
 export default {
+  components: {VLink},
   computed: {
     menuitems () {
       return [

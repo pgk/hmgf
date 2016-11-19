@@ -1,23 +1,26 @@
 <template>
-  <div class="nine columns" v-show="showEntries">
-    <div class="meal-planner-view">
-      <h1>{{ mealPlannerTitle }}</h1>
-      <meal-planner-entry
-        v-for="(entry, index) in entries"
-        v-bind:entry="entry"
-        v-bind:index="index">
-      </meal-planner-entry>
-      <button v-on:click="addEmptyEntry">Add Entry</button>
-    </div>
-  </div>
+  <main-layout>
+    <transition appear>
+      <div class="meal-planner-view">
+        <h1>{{ mealPlannerTitle }}</h1>
+        <meal-planner-entry
+          v-for="(entry, index) in entries"
+          v-bind:entry="entry"
+          v-bind:index="index">
+        </meal-planner-entry>
+        <button v-on:click="addEmptyEntry">Add Entry</button>
+      </div>
+    </transition>
+  </main-layout>
 </template>
 
 <script>
-import MealPlannerEntry from './MealPlannerEntry'
+import MealPlannerEntry from '../components/MealPlannerEntry'
+import MainLayout from '../layouts/MainLayout.vue'
 import * as types from './../store/mutation-types'
 
 export default {
-  components: {MealPlannerEntry},
+  components: {MealPlannerEntry, MainLayout},
   methods: {
     addEmptyEntry () {
       this.$store.dispatch(types.ADD_EMPTY_ENTRY)
